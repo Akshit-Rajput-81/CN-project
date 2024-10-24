@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Admin - Disaster Requests</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <h1>Emergency Requests</h1>
+        <table id="requestTable">
+            <thead>
+                <tr>
+                    <th>Location Name</th>
+                    <th>Emergency Type</th>
+                    <th>Radius (m)</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="locationName">h</td>
+                    <td id="emergencyType">h</td>
+                    <td id="Radius">h</td>
+                    <td id="lat">h</td>
+                    <td id="lng">h</td>
+                    <td id="Status">h</td>
+                    <td>
+                        <button style="background-color: green; color: white;"
+                            onclick="approveRequest()">Approve</button>
+                        <button style="background-color: red; color: white;" onclick="denyRequest()">Deny</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
+        // Get the emergency requests from localStorage
+        let emergency = localStorage.getItem('disasterRequests');
+        // Declare variables in the global scope
+        let locationName, emergencyType, lat, lng, radius, status, emergency1, color;
+        // Check if there is data in localStorage
+        if (emergency) {
+            emergency1 = JSON.parse(emergency);
+            const locationName = emergency1.locationName;
+            console.log(locationName);
+            const emergencyType = emergency1.emergencyType;
+            const lat = emergency1.lat;
+            const lng = emergency1.lng; // Fixed from 'lang' to 'lng'
+            const radius = emergency1.radius;
+            const status = emergency1.status;
+
+            // Set the values in the table
+            document.getElementById("locationName").textContent = locationName;
+            document.getElementById("emergencyType").textContent = emergencyType;
+            document.getElementById("lat").textContent = lat;
+            document.getElementById("lng").textContent = lng;
+            document.getElementById("Radius").textContent = radius;
+            document.getElementById("Status").textContent = status;
+        } else {
+            console.log('No disaster requests found in localStorage.');
+        }
+
+        // Functions for button actions
+        function approveRequest() {
+            // Handle the approve action (e.g., update status, notify user, etc.)
+            console.log('Request approved');
+            emergency1.status = 'approved';
+            localStorage.setItem('disasterRequests', JSON.stringify(emergency1));
+            if (emergency1.emergencyType.toLowerCase() === 'fire') {
+                color = 'red';
+            } else if (emergency1.emergencyType.toLowerCase() === 'flood') {
+                color = 'blue';
+            } else if (emergency1.emergencyType.toLowerCase() === 'earthquake') {
+                color = 'yellow';
+            } else if (emergency1.emergencyType.toLowerCase() === 'storm') {
+                color = 'green';
+            } else {
+                color = 'gray';  // Default color for unknown emergencies
+            }
+            addCircle(emergency1.lat, emergency1.lng, emergency1.radius,color);
+        }
+
+        function denyRequest() {
+            // Handle the deny action (e.g., update status, notify user, etc.)
+            console.log('Request denied');
+            emergency1.status = 'denied';
+            localStorage.setItem('disasterRequests', JSON.stringify(emergency1));
+        }
+    </script>
+</body>
+
+</html>

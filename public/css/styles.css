@@ -1,0 +1,146 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    height: 100%;
+    position: relative;
+}
+
+#currbutton{
+    color: black;
+    background-color: #e6e6e6;
+}
+#seeChanges{
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #a12222;
+    color: rgb(215, 210, 210);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.2s;
+}
+#requestButton {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #a12222;
+    color: rgb(215, 210, 210);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#requestButton:hover {
+    background-color: #a85652;
+    transform: scale(1.125);
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 20px;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal h2 {
+    color: #333;
+    margin-top: 0;
+    text-align: center;
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 10px;
+    color: #2b2929;
+    font-size: 14px;
+}
+
+.modal input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+.modal input:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.1);
+}
+
+.modal button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+.modal button:hover {
+    background-color: #75a5d8;
+    transform: translateY(-2px);
+}
+
+#closeModal {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

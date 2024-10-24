@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIENT - CN Project</title>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="map"></div>
+    <button id="seeChanges" onclick="circle1()">see</button>
+    <button id="requestButton" onclick="openModal()">+</button>
+    
+    <div id="myModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <h2>Register a Disaster</h2>
+
+            <label for="locationName">Location Name:
+                <input type="text" id="locationName" placeholder="city - area">
+            </label>
+            <label for="emergencyType">Emergency Type:
+                <input type="text" id="emergencyType" placeholder="as flood / tsunami / earthquake">
+            </label>
+            <label for="latitude">Latitude of Place:
+                <input type="text" id="latitude" placeholder="Enter latitude">
+            </label>
+            <label for="longitude">Longitude of Place:
+                <input type="text" id="longitude" placeholder="Enter longitude">
+            </label>
+            <button onclick="fetchLocation()" id="currbutton">Use My Current Location</button>
+            <label><br></label>
+            <label for="radius">Radius (meters):
+                <input type="text" id="radius" placeholder="Enter radius of the area affected(in meters)">
+            </label>
+            <label></label>
+            <button onclick="submitRequest()">Submit Request</button><br>
+            
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script >
+        function circle1(){
+            let circleDetails=JSON.parse(localStorage.getItem('circleDetails'));
+            var circle2 = L.circle([circleDetails.lat, circleDetails.lng], {
+            color: circleDetails.color,           // Border color of the circle
+            fillColor: circleDetails.color,       // Fill color of the circle
+            fillOpacity: 0.5,       // Opacity of the fill
+            radius: circleDetails.radius          // Radius of the circle in meters
+        }).addTo(map);
+        console.log('hey');
+        }
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
